@@ -1,11 +1,13 @@
-CLASS cx_no_check DEFINITION PUBLIC CREATE PUBLIC ABSTRACT.
+class cx_no_check definition public create public abstract.
 
-  PUBLIC SECTION.
-  PROTECTED SECTION.
-  PRIVATE SECTION.
+  public section.
+    data previous type ref to cx_root read-only.
+    
+  protected section.
+  private section.
 
-ENDCLASS.
+endclass.
 
-CLASS cx_no_check IMPLEMENTATION.
+class cx_no_check implementation.
 
-ENDCLASS.
+endclass.
