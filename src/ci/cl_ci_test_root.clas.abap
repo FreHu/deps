@@ -16,9 +16,20 @@ CLASS cl_ci_test_root DEFINITION PUBLIC CREATE PUBLIC ABSTRACT.
           scimessages       TYPE STANDARD TABLE OF string.
 
     CONSTANTS:
+      c_pc_exceptn_posibl TYPE c LENGTH 1 VALUE '?',
+      c_pc_exceptn_exists TYPE c LENGTH 1 VALUE '?',
+      c_exceptn_imposibl TYPE c LENGTH 1 VALUE '?'.
+
+    CONSTANTS:
+      c_type_include TYPE c LENGTH 4 VALUE '????',
+      c_type_program TYPE c LENGTH 4 VALUE '????'.
+
+    CONSTANTS:
       c_note    TYPE c LENGTH 1 VALUE '?',
       c_warning TYPE c LENGTH 1 VALUE '?',
       c_error   TYPE c LENGTH 1 VALUE '?'.
+
+    DATA name TYPE string.
 
     METHODS
       get_message_text
@@ -43,6 +54,14 @@ CLASS cl_ci_test_root DEFINITION PUBLIC CREATE PUBLIC ABSTRACT.
 
     METHODS
       run
+        ABSTRACT.
+
+    METHODS
+      run_end
+        ABSTRACT.
+
+    METHODS
+      run_begin
         ABSTRACT.
 
     METHODS
@@ -88,7 +107,11 @@ CLASS cl_ci_test_root DEFINITION PUBLIC CREATE PUBLIC ABSTRACT.
           p_param_2      TYPE string
           p_param_3      TYPE string
           p_param_4      TYPE string
-          p_inclspec     TYPE string.
+          p_inclspec     TYPE string
+          p_detail       TYPE xstring
+          p_checksum_1   TYPE i
+          p_comments     TYPE string.
+* todo, some of the above is from version something?
 
     METHODS
       consolidate_for_display

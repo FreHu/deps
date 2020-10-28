@@ -1,30 +1,27 @@
-INTERFACE if_apack_manifest PUBLIC.
+INTERFACE zif_apack_manifest PUBLIC.
 
-  TYPES: BEGIN OF ty_identifier,
-           group_id    TYPE string,
-           artifact_id TYPE string,
-         END OF ty_identifier,
-         BEGIN OF ty_identifier_with_version.
-           INCLUDE TYPE ty_identifier.
-  TYPES: version TYPE string,
-         END OF ty_identifier_with_version,
-         BEGIN OF ty_dependency.
-           INCLUDE TYPE ty_identifier_with_version.
-  TYPES: git_url        TYPE string,
-           target_package TYPE if_adt_object_reference_ch=>ty_object_reference,
+  TYPES: BEGIN OF ty_dependency,
+           group_id       TYPE string,
+           artifact_id    TYPE string,
+           version        TYPE string,
+           git_url        TYPE string,
+           target_package TYPE c LENGTH 30,
          END OF ty_dependency,
-         ty_dependencies    TYPE STANDARD TABLE OF ty_dependency WITH NON-UNIQUE DEFAULT KEY,
-         " normally, this would be of type ENUM, but de/serialization of ENUMs doesn't seem to work yet
+         ty_dependencies    TYPE STANDARD TABLE OF ty_dependency
+                            WITH NON-UNIQUE DEFAULT KEY,
          ty_repository_type TYPE string,
-         BEGIN OF ty_descriptor.
-           INCLUDE TYPE ty_identifier_with_version.
-  TYPES:   repository_type TYPE ty_repository_type,
+         BEGIN OF ty_descriptor,
+           group_id        TYPE string,
+           artifact_id     TYPE string,
+           version         TYPE string,
+           repository_type TYPE ty_repository_type,
            git_url         TYPE string,
            dependencies    TYPE ty_dependencies,
-           END OF ty_descriptor.
+         END OF ty_descriptor.
 
-  CONSTANTS: co_file_name TYPE string VALUE '.apack-manifest.xml',
-             co_abap_git  TYPE ty_repository_type VALUE 'abapGit'.
+  CONSTANTS: co_file_name         TYPE string VALUE '.apack-manifest.xml',
+             co_abap_git          TYPE ty_repository_type VALUE 'abapGit',
+             co_interface_version TYPE i VALUE 1.
 
   DATA: descriptor TYPE ty_descriptor READ-ONLY.
 
